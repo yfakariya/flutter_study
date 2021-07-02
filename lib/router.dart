@@ -17,6 +17,7 @@ class RouteData {
 }
 
 const homeRoute = '/';
+const ffiRoute = '/ffi';
 
 final appRouteData = [
   RouteData._(
@@ -24,6 +25,12 @@ final appRouteData = [
     homeRoute,
     Icons.home,
     (_) => HomeScreen(),
+  ),
+  RouteData._(
+    'FFI',
+    ffiRoute,
+    Icons.home,
+    (_) => FfiScreen(),
   ),
 ];
 
