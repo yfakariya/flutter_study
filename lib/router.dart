@@ -9,11 +9,11 @@ import 'screens/ffi.dart';
 typedef RouterFunction = Widget Function(BuildContext);
 
 class RouteData {
-  final String title;
+  final String titleKey;
   final String route;
   final IconData icon;
   final RouterFunction routerFunction;
-  RouteData._(this.title, this.route, this.icon, this.routerFunction);
+  RouteData._(this.titleKey, this.route, this.icon, this.routerFunction);
 }
 
 const homeRoute = '/';
@@ -21,13 +21,13 @@ const ffiRoute = '/ffi';
 
 final appRouteData = [
   RouteData._(
-    'Home',
+    'screens.home.title',
     homeRoute,
     Icons.home,
     (_) => HomeScreen(),
   ),
   RouteData._(
-    'FFI',
+    'screens.ffi.title',
     ffiRoute,
     Icons.home,
     (_) => FfiScreen(),

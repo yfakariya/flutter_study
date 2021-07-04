@@ -3,6 +3,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_exp/router.dart';
+import 'package:easy_localization/easy_localization.dart';
 
 class App extends StatelessWidget {
   const App({Key? key}) : super(key: key);
@@ -26,6 +27,9 @@ class App extends StatelessWidget {
       ),
       routes: appRoutes,
       initialRoute: initialRoute,
+      localizationsDelegates: context.localizationDelegates,
+      supportedLocales: context.supportedLocales,
+      locale: context.locale,
     );
   }
 }

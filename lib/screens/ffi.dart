@@ -1,15 +1,15 @@
 // See LICENCE file in the root.
 
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/src/widgets/framework.dart';
 import 'package:flutter/widgets.dart';
-import 'package:flutter_exp/layouts/screen.dart';
-import 'package:flutter_exp/utils/ffi_sample.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:form_validator/form_validator.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:path/path.dart';
-import 'package:riverpod/src/framework.dart';
+
+import '../layouts/screen.dart';
+import '../utils/ffi_sample.dart';
 
 part 'ffi.freezed.dart';
 
@@ -23,15 +23,18 @@ class FfiScreen extends Screen {
       autovalidateMode: AutovalidateMode.onUserInteraction,
       child: Column(
         children: [
-          Text(state.result ?? '(no result)'),
+          Text(state.result ?? 'screens.ffi.noResult'.tr()),
           TextFormField(
             initialValue: state.filePath,
             onFieldSubmitted: (value) => vm.setFilePath(value),
             validator: (value) => vm.validateFilePath(value),
+            decoration: InputDecoration(
+                labelText: 'screens.ffi.pathTextForm.label'.tr(),
+                hintText: 'screens.ffi.pathTextForm.hint'.tr()),
           ),
           ElevatedButton(
             onPressed: vm.run,
-            child: Text('Run'),
+            child: Text('screens.ffi.runButton').tr(),
           )
         ],
       ),
@@ -40,7 +43,7 @@ class FfiScreen extends Screen {
 
   @override
   String getTitle(BuildContext context, ScopedReader watch) =>
-      'First Flutter app.';
+      'screens.ffi.title'.tr();
 }
 
 @freezed
@@ -72,7 +75,14 @@ class FfiPresenter extends StateNotifier<FfiState> {
       final result = doTest(this.state.filePath!);
       this.state = this.state.copyWith(result: result);
     } catch (error, stackTrace) {
-      this.state = FfiState(result: 'ERROR! $error\n$stackTrace');
+      this.state = FfiState(
+        result: 'screens.ffi.errorResult'.tr(
+          namedArgs: {
+            "error": error.toString(),
+            "stackTrace": stackTrace.toString(),
+          },
+        ),
+      );
     }
   }
 }

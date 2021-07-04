@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_exp/router.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:easy_localization/easy_localization.dart';
 
 abstract class Screen extends ConsumerWidget {
   @override
@@ -17,11 +18,11 @@ abstract class Screen extends ConsumerWidget {
           child: ListView(
             children: [
               DrawerHeader(
-                child: Text('Menu'),
+                child: Text('layouts.screen.menuTitle'.tr()),
               ),
               ...appRouteData.map(
                 (e) => ListTile(
-                  title: Text(e.title),
+                  title: Text(e.titleKey).tr(),
                   onTap: () => Navigator.pushNamed(context, e.route),
                 ),
               )
