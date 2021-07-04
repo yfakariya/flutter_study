@@ -35,6 +35,18 @@ class CodegenLoader extends AssetLoader{
       },
       "runButton": "Run"
     }
+  },
+  "utils": {
+    "validator": {
+      "minLenth": "The field must be at least {length} characters long",
+      "maxLenth": "The field must be at most {length} characters long",
+      "email": "The field is not a valid email address",
+      "phoneNumber": "The field is not a valid phone number",
+      "required": "The field is required",
+      "ip": "The field is not a valid IP address",
+      "ipv6": "The field is not a valid IPv6 address",
+      "url": "The field is not a valid URL address"
+    }
   }
 };
 static const Map<String,dynamic> ja = {
@@ -57,6 +69,18 @@ static const Map<String,dynamic> ja = {
         "hint": "ファイルパスを入力"
       },
       "runButton": "実行"
+    }
+  },
+  "utils": {
+    "validator": {
+      "minLenth": "{length}文字以上でなければなりません",
+      "maxLenth": "{length}文字以下でなければなりません",
+      "email": "メールアドレスとして正しくありません",
+      "phoneNumber": "電話番号として正しくありません",
+      "required": "必ず入力してください",
+      "ip": "IPアドレスとして正しくありません",
+      "ipv6": "IP v6アドレスとして正しくありません",
+      "url": "URLとして正しくありません"
     }
   }
 };

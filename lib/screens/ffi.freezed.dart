@@ -16,10 +16,10 @@ final _privateConstructorUsedError = UnsupportedError(
 class _$FfiStateTearOff {
   const _$FfiStateTearOff();
 
-  FfiStateDefault call({String? filePath, String? result}) {
+  FfiStateDefault call({String? result, required bool isValid}) {
     return FfiStateDefault(
-      filePath: filePath,
       result: result,
+      isValid: isValid,
     );
   }
 }
@@ -29,8 +29,8 @@ const $FfiState = _$FfiStateTearOff();
 
 /// @nodoc
 mixin _$FfiState {
-  String? get filePath => throw _privateConstructorUsedError;
   String? get result => throw _privateConstructorUsedError;
+  bool get isValid => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
   $FfiStateCopyWith<FfiState> get copyWith =>
@@ -41,7 +41,7 @@ mixin _$FfiState {
 abstract class $FfiStateCopyWith<$Res> {
   factory $FfiStateCopyWith(FfiState value, $Res Function(FfiState) then) =
       _$FfiStateCopyWithImpl<$Res>;
-  $Res call({String? filePath, String? result});
+  $Res call({String? result, bool isValid});
 }
 
 /// @nodoc
@@ -54,18 +54,18 @@ class _$FfiStateCopyWithImpl<$Res> implements $FfiStateCopyWith<$Res> {
 
   @override
   $Res call({
-    Object? filePath = freezed,
     Object? result = freezed,
+    Object? isValid = freezed,
   }) {
     return _then(_value.copyWith(
-      filePath: filePath == freezed
-          ? _value.filePath
-          : filePath // ignore: cast_nullable_to_non_nullable
-              as String?,
       result: result == freezed
           ? _value.result
           : result // ignore: cast_nullable_to_non_nullable
               as String?,
+      isValid: isValid == freezed
+          ? _value.isValid
+          : isValid // ignore: cast_nullable_to_non_nullable
+              as bool,
     ));
   }
 }
@@ -77,7 +77,7 @@ abstract class $FfiStateDefaultCopyWith<$Res>
           FfiStateDefault value, $Res Function(FfiStateDefault) then) =
       _$FfiStateDefaultCopyWithImpl<$Res>;
   @override
-  $Res call({String? filePath, String? result});
+  $Res call({String? result, bool isValid});
 }
 
 /// @nodoc
@@ -92,18 +92,18 @@ class _$FfiStateDefaultCopyWithImpl<$Res> extends _$FfiStateCopyWithImpl<$Res>
 
   @override
   $Res call({
-    Object? filePath = freezed,
     Object? result = freezed,
+    Object? isValid = freezed,
   }) {
     return _then(FfiStateDefault(
-      filePath: filePath == freezed
-          ? _value.filePath
-          : filePath // ignore: cast_nullable_to_non_nullable
-              as String?,
       result: result == freezed
           ? _value.result
           : result // ignore: cast_nullable_to_non_nullable
               as String?,
+      isValid: isValid == freezed
+          ? _value.isValid
+          : isValid // ignore: cast_nullable_to_non_nullable
+              as bool,
     ));
   }
 }
@@ -111,34 +111,33 @@ class _$FfiStateDefaultCopyWithImpl<$Res> extends _$FfiStateCopyWithImpl<$Res>
 /// @nodoc
 
 class _$FfiStateDefault implements FfiStateDefault {
-  _$FfiStateDefault({this.filePath, this.result});
+  _$FfiStateDefault({this.result, required this.isValid});
 
   @override
-  final String? filePath;
-  @override
   final String? result;
+  @override
+  final bool isValid;
 
   @override
   String toString() {
-    return 'FfiState(filePath: $filePath, result: $result)';
+    return 'FfiState(result: $result, isValid: $isValid)';
   }
 
   @override
   bool operator ==(dynamic other) {
     return identical(this, other) ||
         (other is FfiStateDefault &&
-            (identical(other.filePath, filePath) ||
-                const DeepCollectionEquality()
-                    .equals(other.filePath, filePath)) &&
             (identical(other.result, result) ||
-                const DeepCollectionEquality().equals(other.result, result)));
+                const DeepCollectionEquality().equals(other.result, result)) &&
+            (identical(other.isValid, isValid) ||
+                const DeepCollectionEquality().equals(other.isValid, isValid)));
   }
 
   @override
   int get hashCode =>
       runtimeType.hashCode ^
-      const DeepCollectionEquality().hash(filePath) ^
-      const DeepCollectionEquality().hash(result);
+      const DeepCollectionEquality().hash(result) ^
+      const DeepCollectionEquality().hash(isValid);
 
   @JsonKey(ignore: true)
   @override
@@ -147,13 +146,13 @@ class _$FfiStateDefault implements FfiStateDefault {
 }
 
 abstract class FfiStateDefault implements FfiState {
-  factory FfiStateDefault({String? filePath, String? result}) =
+  factory FfiStateDefault({String? result, required bool isValid}) =
       _$FfiStateDefault;
 
   @override
-  String? get filePath => throw _privateConstructorUsedError;
-  @override
   String? get result => throw _privateConstructorUsedError;
+  @override
+  bool get isValid => throw _privateConstructorUsedError;
   @override
   @JsonKey(ignore: true)
   $FfiStateDefaultCopyWith<FfiStateDefault> get copyWith =>

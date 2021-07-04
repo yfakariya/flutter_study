@@ -6,31 +6,35 @@ import 'package:flutter/widgets.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:form_validator/form_validator.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
-import 'package:path/path.dart';
 
 import '../layouts/screen.dart';
 import '../models/ffi_sample.dart';
+import '../utils/form_validator_locale.dart';
 
 part 'ffi.freezed.dart';
 
 class FfiScreen extends Screen {
+  final _filePathFieldKey =
+      GlobalKey<FormFieldState>(debugLabel: 'FfiScreen.filePath');
+
   @override
   Widget createView(BuildContext context, ScopedReader watch) {
     final state = watch(_vmProvider);
     final vm = watch(_vmProvider.notifier);
     return Form(
-      // 行けてない
       autovalidateMode: AutovalidateMode.onUserInteraction,
+      onChanged: () => vm.setIsValid([_filePathFieldKey.currentState]),
       child: Column(
         children: [
           Text(state.result ?? 'screens.ffi.noResult'.tr()),
           TextFormField(
-            initialValue: state.filePath,
-            onFieldSubmitted: (value) => vm.setFilePath(value),
-            validator: (value) => vm.validateFilePath(value),
+            key: _filePathFieldKey,
+            controller: vm.filePathController,
+            validator: (value) => vm.validateFilePath(context, value),
             decoration: InputDecoration(
-                labelText: 'screens.ffi.pathTextForm.label'.tr(),
-                hintText: 'screens.ffi.pathTextForm.hint'.tr()),
+              labelText: 'screens.ffi.pathTextForm.label'.tr(),
+              hintText: 'screens.ffi.pathTextForm.hint'.tr(),
+            ),
           ),
           ElevatedButton(
             onPressed: vm.run,
@@ -49,40 +53,50 @@ class FfiScreen extends Screen {
 @freezed
 class FfiState with _$FfiState {
   factory FfiState({
-    String? filePath,
     String? result,
+    required bool isValid,
   }) = FfiStateDefault;
 }
 
 class FfiPresenter extends StateNotifier<FfiState> {
-  FfiPresenter() : super(FfiState());
+  final TextEditingController filePathController = TextEditingController();
 
-  bool get canRun => this.state.filePath != null;
+  FfiPresenter() : super(FfiState(isValid: false));
 
-  void Function()? get run => canRun ? _run : null;
-
-  void setFilePath(String filePath) {
-    this.state = FfiState(filePath: absolute(filePath));
+  @override
+  void dispose() {
+    this.filePathController.dispose();
+    super.dispose();
   }
 
-  final _filePathValidator =
-      ValidationBuilder().required().minLength(1).build();
+  void setIsValid(List<FormFieldState?> fieldStates) {
+    this.state = this.state.copyWith(
+          isValid: fieldStates.every((e) => e?.isValid == true),
+        );
+  }
 
-  String? validateFilePath(String? value) => _filePathValidator(value);
+  String? validateFilePath(BuildContext context, String? value) =>
+      ValidationBuilder(
+        locale: EasyLocalizerFormValidationLocale(context),
+      ).required().minLength(1).build()(value);
+
+  VoidCallback? get run => this.state.isValid ? this._run : null;
 
   void _run() {
+    assert(this.state.isValid);
+    final filePath = filePathController.text;
     try {
-      final result = doTest(this.state.filePath!);
+      final result = doTest(filePath);
       this.state = this.state.copyWith(result: result);
     } catch (error, stackTrace) {
-      this.state = FfiState(
-        result: 'screens.ffi.errorResult'.tr(
-          namedArgs: {
-            "error": error.toString(),
-            "stackTrace": stackTrace.toString(),
-          },
-        ),
-      );
+      this.state = this.state.copyWith(
+            result: 'screens.ffi.errorResult'.tr(
+              namedArgs: {
+                "error": error.toString(),
+                "stackTrace": stackTrace.toString(),
+              },
+            ),
+          );
     }
   }
 }
