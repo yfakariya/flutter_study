@@ -2,7 +2,6 @@
 
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_exp/l10n/codegen_loader.g.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import 'l10n/codegen_loader.g.dart';
