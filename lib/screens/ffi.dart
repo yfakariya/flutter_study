@@ -9,7 +9,7 @@ import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:path/path.dart';
 
 import '../layouts/screen.dart';
-import '../utils/ffi_sample.dart';
+import '../models/ffi_sample.dart';
 
 part 'ffi.freezed.dart';
 
