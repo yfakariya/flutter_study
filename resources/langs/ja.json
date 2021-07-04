@@ -1,0 +1,23 @@
+{
+    "layouts": {
+        "screen": {
+            "menuTitle": "メニュー"
+        }
+    },
+    "screens":{
+        "home": {
+            "title": "ホーム",
+            "description": "ホーム画面です。メニューから機能を選択してください。"
+        },
+        "ffi": {
+            "title": "FFI",
+            "noResult": "（結果がありません）",
+            "errorResult": "エラー！　{error}\n{stackTrace}",
+            "pathTextForm": {
+                "label": "開くファイルのパス",
+                "hint": "ファイルパスを入力"
+            },
+            "runButton": "実行"
+        }
+    }
+}

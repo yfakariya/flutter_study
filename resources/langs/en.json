@@ -1,0 +1,23 @@
+{
+    "layouts": {
+        "screen": {
+            "menuTitle": "Menu"
+        }
+    },
+    "screens":{
+        "home": {
+            "title": "Home",
+            "description": "HOME Screen. Please select the function from menu."
+        },
+        "ffi": {
+            "title": "FFI",
+            "noResult": "(no result)",
+            "errorResult": "ERROR! {error}\n{stackTrace}",
+            "pathTextForm": {
+                "label": "File path to open",
+                "hint": "Input file path"
+            },
+            "runButton": "Run"
+        }
+    }
+}
