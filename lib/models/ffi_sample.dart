@@ -5,7 +5,19 @@ import 'dart:ffi';
 import 'package:ffi/ffi.dart';
 import 'package:win32/win32.dart';
 
+bool _isFirst = true;
+
+void _ensureFfiInitialized() {
+  // We must call GetLastError() before any FFI call because it always returns 0 for first call.
+  if (_isFirst) {
+    GetLastError();
+    _isFirst = false;
+  }
+}
+
 String doTest(String filePath) {
+  _ensureFfiInitialized();
+
   final pFilePath = filePath.toNativeUtf16();
   final hFile = CreateFile(
     pFilePath,
