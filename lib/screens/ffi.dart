@@ -7,6 +7,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:form_validator/form_validator.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 
+import '../l10n/locale_keys.g.dart';
 import '../layouts/screen.dart';
 import '../models/ffi_sample.dart';
 import '../utils/form_validator_locale.dart';
@@ -26,19 +27,19 @@ class FfiScreen extends Screen {
       onChanged: () => vm.setIsValid([_filePathFieldKey.currentState]),
       child: Column(
         children: [
-          Text(state.result ?? 'screens.ffi.noResult'.tr()),
+          Text(state.result ?? LocaleKeys.screens_ffi_noResult.tr()),
           TextFormField(
             key: _filePathFieldKey,
             controller: vm.filePathController,
             validator: (value) => vm.validateFilePath(context, value),
             decoration: InputDecoration(
-              labelText: 'screens.ffi.pathTextForm.label'.tr(),
-              hintText: 'screens.ffi.pathTextForm.hint'.tr(),
+              labelText: LocaleKeys.screens_ffi_pathTextForm_label.tr(),
+              hintText: LocaleKeys.screens_ffi_pathTextForm_hint.tr(),
             ),
           ),
           ElevatedButton(
             onPressed: vm.run,
-            child: Text('screens.ffi.runButton').tr(),
+            child: Text(LocaleKeys.screens_ffi_runButton).tr(),
           )
         ],
       ),
@@ -47,7 +48,7 @@ class FfiScreen extends Screen {
 
   @override
   String getTitle(BuildContext context, ScopedReader watch) =>
-      'screens.ffi.title'.tr();
+      LocaleKeys.screens_ffi_title.tr();
 }
 
 @freezed
@@ -90,10 +91,10 @@ class FfiPresenter extends StateNotifier<FfiState> {
       this.state = this.state.copyWith(result: result);
     } catch (error, stackTrace) {
       this.state = this.state.copyWith(
-            result: 'screens.ffi.errorResult'.tr(
+            result: LocaleKeys.screens_ffi_errorResult.tr(
               namedArgs: {
-                "error": error.toString(),
-                "stackTrace": stackTrace.toString(),
+                'error': error.toString(),
+                'stackTrace': stackTrace.toString(),
               },
             ),
           );

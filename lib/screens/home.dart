@@ -8,12 +8,14 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:riverpod/src/framework.dart';
 import 'package:easy_localization/easy_localization.dart';
 
+import '../l10n/locale_keys.g.dart';
+
 class HomeScreen extends Screen {
   @override
   Widget createView(BuildContext context, ScopedReader watch) =>
-      Text('screens.home.description').tr();
+      Text(LocaleKeys.screens_home_title).tr();
 
   @override
   String getTitle(BuildContext context, ScopedReader watch) =>
-      'screens.home.title'.tr();
+      LocaleKeys.screens_home_title.tr();
 }

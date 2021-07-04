@@ -16,8 +16,8 @@ abstract class  LocaleKeys {
   static const screens_ffi_runButton = 'screens.ffi.runButton';
   static const screens_ffi = 'screens.ffi';
   static const screens = 'screens';
-  static const utils_validator_minLenth = 'utils.validator.minLenth';
-  static const utils_validator_maxLenth = 'utils.validator.maxLenth';
+  static const utils_validator_minLength = 'utils.validator.minLength';
+  static const utils_validator_maxLength = 'utils.validator.maxLength';
   static const utils_validator_email = 'utils.validator.email';
   static const utils_validator_phoneNumber = 'utils.validator.phoneNumber';
   static const utils_validator_required = 'utils.validator.required';

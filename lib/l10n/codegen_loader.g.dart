@@ -38,8 +38,8 @@ class CodegenLoader extends AssetLoader{
   },
   "utils": {
     "validator": {
-      "minLenth": "The field must be at least {length} characters long",
-      "maxLenth": "The field must be at most {length} characters long",
+      "minLength": "The field must be at least {length} characters long",
+      "maxLength": "The field must be at most {length} characters long",
       "email": "The field is not a valid email address",
       "phoneNumber": "The field is not a valid phone number",
       "required": "The field is required",

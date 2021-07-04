@@ -22,8 +22,8 @@
     },
     "utils": {
         "validator": {
-            "minLenth": "{length}文字以上でなければなりません",
-            "maxLenth": "{length}文字以下でなければなりません",
+            "minLength": "{length}文字以上でなければなりません",
+            "maxLength": "{length}文字以下でなければなりません",
             "email": "メールアドレスとして正しくありません",
             "phoneNumber": "電話番号として正しくありません",
             "required": "必ず入力してください",
