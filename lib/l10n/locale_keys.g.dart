@@ -16,15 +16,5 @@ abstract class  LocaleKeys {
   static const screens_ffi_runButton = 'screens.ffi.runButton';
   static const screens_ffi = 'screens.ffi';
   static const screens = 'screens';
-  static const utils_validator_minLength = 'utils.validator.minLength';
-  static const utils_validator_maxLength = 'utils.validator.maxLength';
-  static const utils_validator_email = 'utils.validator.email';
-  static const utils_validator_phoneNumber = 'utils.validator.phoneNumber';
-  static const utils_validator_required = 'utils.validator.required';
-  static const utils_validator_ip = 'utils.validator.ip';
-  static const utils_validator_ipv6 = 'utils.validator.ipv6';
-  static const utils_validator_url = 'utils.validator.url';
-  static const utils_validator = 'utils.validator';
-  static const utils = 'utils';
 
 }

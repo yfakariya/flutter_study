@@ -3,6 +3,7 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
+import 'package:flutter_form_builder/localization/form_builder_localizations.dart';
 
 import 'router.dart';
 
@@ -28,7 +29,10 @@ class App extends StatelessWidget {
       ),
       routes: appRoutes,
       initialRoute: initialRoute,
-      localizationsDelegates: context.localizationDelegates,
+      localizationsDelegates: [
+        FormBuilderLocalizations.delegate,
+        ...context.localizationDelegates,
+      ],
       supportedLocales: context.supportedLocales,
       locale: context.locale,
     );

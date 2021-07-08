@@ -16,11 +16,15 @@ final _privateConstructorUsedError = UnsupportedError(
 class _$FfiStateTearOff {
   const _$FfiStateTearOff();
 
-  FfiStateDefault call({String? result, required bool isValid}) {
-    return FfiStateDefault(
+  FfiStateCompleted completed({String? result, required String filePath}) {
+    return FfiStateCompleted(
       result: result,
-      isValid: isValid,
+      filePath: filePath,
     );
+  }
+
+  FfiStatePartial partial() {
+    return FfiStatePartial();
   }
 }
 
@@ -29,11 +33,31 @@ const $FfiState = _$FfiStateTearOff();
 
 /// @nodoc
 mixin _$FfiState {
-  String? get result => throw _privateConstructorUsedError;
-  bool get isValid => throw _privateConstructorUsedError;
-
-  @JsonKey(ignore: true)
-  $FfiStateCopyWith<FfiState> get copyWith =>
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function(String? result, String filePath) completed,
+    required TResult Function() partial,
+  }) =>
+      throw _privateConstructorUsedError;
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function(String? result, String filePath)? completed,
+    TResult Function()? partial,
+    required TResult orElse(),
+  }) =>
+      throw _privateConstructorUsedError;
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(FfiStateCompleted value) completed,
+    required TResult Function(FfiStatePartial value) partial,
+  }) =>
+      throw _privateConstructorUsedError;
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(FfiStateCompleted value)? completed,
+    TResult Function(FfiStatePartial value)? partial,
+    required TResult orElse(),
+  }) =>
       throw _privateConstructorUsedError;
 }
 
@@ -41,7 +65,6 @@ mixin _$FfiState {
 abstract class $FfiStateCopyWith<$Res> {
   factory $FfiStateCopyWith(FfiState value, $Res Function(FfiState) then) =
       _$FfiStateCopyWithImpl<$Res>;
-  $Res call({String? result, bool isValid});
 }
 
 /// @nodoc
@@ -51,110 +74,218 @@ class _$FfiStateCopyWithImpl<$Res> implements $FfiStateCopyWith<$Res> {
   final FfiState _value;
   // ignore: unused_field
   final $Res Function(FfiState) _then;
+}
+
+/// @nodoc
+abstract class $FfiStateCompletedCopyWith<$Res> {
+  factory $FfiStateCompletedCopyWith(
+          FfiStateCompleted value, $Res Function(FfiStateCompleted) then) =
+      _$FfiStateCompletedCopyWithImpl<$Res>;
+  $Res call({String? result, String filePath});
+}
+
+/// @nodoc
+class _$FfiStateCompletedCopyWithImpl<$Res> extends _$FfiStateCopyWithImpl<$Res>
+    implements $FfiStateCompletedCopyWith<$Res> {
+  _$FfiStateCompletedCopyWithImpl(
+      FfiStateCompleted _value, $Res Function(FfiStateCompleted) _then)
+      : super(_value, (v) => _then(v as FfiStateCompleted));
+
+  @override
+  FfiStateCompleted get _value => super._value as FfiStateCompleted;
 
   @override
   $Res call({
     Object? result = freezed,
-    Object? isValid = freezed,
+    Object? filePath = freezed,
   }) {
-    return _then(_value.copyWith(
+    return _then(FfiStateCompleted(
       result: result == freezed
           ? _value.result
           : result // ignore: cast_nullable_to_non_nullable
               as String?,
-      isValid: isValid == freezed
-          ? _value.isValid
-          : isValid // ignore: cast_nullable_to_non_nullable
-              as bool,
-    ));
-  }
-}
-
-/// @nodoc
-abstract class $FfiStateDefaultCopyWith<$Res>
-    implements $FfiStateCopyWith<$Res> {
-  factory $FfiStateDefaultCopyWith(
-          FfiStateDefault value, $Res Function(FfiStateDefault) then) =
-      _$FfiStateDefaultCopyWithImpl<$Res>;
-  @override
-  $Res call({String? result, bool isValid});
-}
-
-/// @nodoc
-class _$FfiStateDefaultCopyWithImpl<$Res> extends _$FfiStateCopyWithImpl<$Res>
-    implements $FfiStateDefaultCopyWith<$Res> {
-  _$FfiStateDefaultCopyWithImpl(
-      FfiStateDefault _value, $Res Function(FfiStateDefault) _then)
-      : super(_value, (v) => _then(v as FfiStateDefault));
-
-  @override
-  FfiStateDefault get _value => super._value as FfiStateDefault;
-
-  @override
-  $Res call({
-    Object? result = freezed,
-    Object? isValid = freezed,
-  }) {
-    return _then(FfiStateDefault(
-      result: result == freezed
-          ? _value.result
-          : result // ignore: cast_nullable_to_non_nullable
-              as String?,
-      isValid: isValid == freezed
-          ? _value.isValid
-          : isValid // ignore: cast_nullable_to_non_nullable
-              as bool,
+      filePath: filePath == freezed
+          ? _value.filePath
+          : filePath // ignore: cast_nullable_to_non_nullable
+              as String,
     ));
   }
 }
 
 /// @nodoc
 
-class _$FfiStateDefault implements FfiStateDefault {
-  _$FfiStateDefault({this.result, required this.isValid});
+class _$FfiStateCompleted implements FfiStateCompleted {
+  _$FfiStateCompleted({this.result, required this.filePath});
 
   @override
   final String? result;
   @override
-  final bool isValid;
+  final String filePath;
 
   @override
   String toString() {
-    return 'FfiState(result: $result, isValid: $isValid)';
+    return 'FfiState.completed(result: $result, filePath: $filePath)';
   }
 
   @override
   bool operator ==(dynamic other) {
     return identical(this, other) ||
-        (other is FfiStateDefault &&
+        (other is FfiStateCompleted &&
             (identical(other.result, result) ||
                 const DeepCollectionEquality().equals(other.result, result)) &&
-            (identical(other.isValid, isValid) ||
-                const DeepCollectionEquality().equals(other.isValid, isValid)));
+            (identical(other.filePath, filePath) ||
+                const DeepCollectionEquality()
+                    .equals(other.filePath, filePath)));
   }
 
   @override
   int get hashCode =>
       runtimeType.hashCode ^
       const DeepCollectionEquality().hash(result) ^
-      const DeepCollectionEquality().hash(isValid);
+      const DeepCollectionEquality().hash(filePath);
 
   @JsonKey(ignore: true)
   @override
-  $FfiStateDefaultCopyWith<FfiStateDefault> get copyWith =>
-      _$FfiStateDefaultCopyWithImpl<FfiStateDefault>(this, _$identity);
+  $FfiStateCompletedCopyWith<FfiStateCompleted> get copyWith =>
+      _$FfiStateCompletedCopyWithImpl<FfiStateCompleted>(this, _$identity);
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function(String? result, String filePath) completed,
+    required TResult Function() partial,
+  }) {
+    return completed(result, filePath);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function(String? result, String filePath)? completed,
+    TResult Function()? partial,
+    required TResult orElse(),
+  }) {
+    if (completed != null) {
+      return completed(result, filePath);
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(FfiStateCompleted value) completed,
+    required TResult Function(FfiStatePartial value) partial,
+  }) {
+    return completed(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(FfiStateCompleted value)? completed,
+    TResult Function(FfiStatePartial value)? partial,
+    required TResult orElse(),
+  }) {
+    if (completed != null) {
+      return completed(this);
+    }
+    return orElse();
+  }
 }
 
-abstract class FfiStateDefault implements FfiState {
-  factory FfiStateDefault({String? result, required bool isValid}) =
-      _$FfiStateDefault;
+abstract class FfiStateCompleted implements FfiState {
+  factory FfiStateCompleted({String? result, required String filePath}) =
+      _$FfiStateCompleted;
+
+  String? get result => throw _privateConstructorUsedError;
+  String get filePath => throw _privateConstructorUsedError;
+  @JsonKey(ignore: true)
+  $FfiStateCompletedCopyWith<FfiStateCompleted> get copyWith =>
+      throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+abstract class $FfiStatePartialCopyWith<$Res> {
+  factory $FfiStatePartialCopyWith(
+          FfiStatePartial value, $Res Function(FfiStatePartial) then) =
+      _$FfiStatePartialCopyWithImpl<$Res>;
+}
+
+/// @nodoc
+class _$FfiStatePartialCopyWithImpl<$Res> extends _$FfiStateCopyWithImpl<$Res>
+    implements $FfiStatePartialCopyWith<$Res> {
+  _$FfiStatePartialCopyWithImpl(
+      FfiStatePartial _value, $Res Function(FfiStatePartial) _then)
+      : super(_value, (v) => _then(v as FfiStatePartial));
 
   @override
-  String? get result => throw _privateConstructorUsedError;
+  FfiStatePartial get _value => super._value as FfiStatePartial;
+}
+
+/// @nodoc
+
+class _$FfiStatePartial implements FfiStatePartial {
+  _$FfiStatePartial();
+
   @override
-  bool get isValid => throw _privateConstructorUsedError;
+  String toString() {
+    return 'FfiState.partial()';
+  }
+
   @override
-  @JsonKey(ignore: true)
-  $FfiStateDefaultCopyWith<FfiStateDefault> get copyWith =>
-      throw _privateConstructorUsedError;
+  bool operator ==(dynamic other) {
+    return identical(this, other) || (other is FfiStatePartial);
+  }
+
+  @override
+  int get hashCode => runtimeType.hashCode;
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function(String? result, String filePath) completed,
+    required TResult Function() partial,
+  }) {
+    return partial();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function(String? result, String filePath)? completed,
+    TResult Function()? partial,
+    required TResult orElse(),
+  }) {
+    if (partial != null) {
+      return partial();
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(FfiStateCompleted value) completed,
+    required TResult Function(FfiStatePartial value) partial,
+  }) {
+    return partial(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(FfiStateCompleted value)? completed,
+    TResult Function(FfiStatePartial value)? partial,
+    required TResult orElse(),
+  }) {
+    if (partial != null) {
+      return partial(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class FfiStatePartial implements FfiState {
+  factory FfiStatePartial() = _$FfiStatePartial;
 }
