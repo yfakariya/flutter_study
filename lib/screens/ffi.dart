@@ -97,7 +97,9 @@ class FfiPresenter extends FormBuilderPresenter<FfiState> {
     try {
       final result = doTest(state.filePath);
       this.state = state.copyWith(result: result);
-    } catch (error, stackTrace) {
+    }
+    // ignore: avoid_catches_without_on_clauses
+    catch (error, stackTrace) {
       this.state = state.copyWith(
         result: LocaleKeys.screens_ffi_errorResult.tr(
           namedArgs: {

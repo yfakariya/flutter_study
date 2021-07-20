@@ -21,13 +21,13 @@ const ffiRoute = '/ffi';
 
 final appRouteData = [
   RouteData._(
-    'screens.home.title',
+    LocaleKeys.screens_home_title,
     homeRoute,
     Icons.home,
     (_) => HomeScreen(),
   ),
   RouteData._(
-    'screens.ffi.title',
+    LocaleKeys.screens_ffi_title,
     ffiRoute,
     Icons.home,
     (_) => FfiScreen(),
