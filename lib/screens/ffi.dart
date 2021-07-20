@@ -20,6 +20,7 @@ class FfiScreen extends Screen {
     final state = watch(_vmProvider);
     final vm = watch(_vmProvider.notifier);
     return vm.createForm(
+      autovalidateMode: AutovalidateMode.onUserInteraction,
       child: Column(
         children: [
           Text(
@@ -29,15 +30,16 @@ class FfiScreen extends Screen {
                 ) ??
                 LocaleKeys.screens_ffi_noResult.tr(),
           ),
-          FormBuilderTextField(
-            name: 'filePath',
-            validator: FormBuilderValidators.compose<String>([
-              FormBuilderValidators.required(context),
-              FormBuilderValidators.minLength(context, 1),
-            ]),
-            decoration: InputDecoration(
-              labelText: LocaleKeys.screens_ffi_pathTextForm_label.tr(),
-              hintText: LocaleKeys.screens_ffi_pathTextForm_hint.tr(),
+          vm.filePath.textForm(
+            context,
+            (x, p) => FormBuilderTextField(
+              // key: p.key,
+              name: p.name,
+              validator: FormBuilderValidators.compose(p.getValidators(x)),
+              decoration: InputDecoration(
+                labelText: LocaleKeys.screens_ffi_pathTextForm_label.tr(),
+                hintText: LocaleKeys.screens_ffi_pathTextForm_hint.tr(),
+              ),
             ),
           ),
           ElevatedButton(
@@ -68,9 +70,18 @@ class FfiPresenter extends FormBuilderPresenter<FfiState> {
   final TextEditingController filePathController = TextEditingController();
 
   @override
-  bool get isCompleted => this.state is FfiStateCompleted;
+  bool get canSubmit => this.state is FfiStateCompleted;
 
-  FfiPresenter() : super(FfiState.partial());
+  PropertyDescriptor get filePath => property('filePath');
+
+  FfiPresenter()
+      : super(
+            initialState: FfiState.partial(),
+            propertiesBuilder: PropertyDescriptorsBuilder()
+              ..add(name: 'filePath', validatorFactories: [
+                FormBuilderValidators.required,
+                (x) => FormBuilderValidators.minLength(x, 1)
+              ]));
 
   @override
   void dispose() {
@@ -80,17 +91,17 @@ class FfiPresenter extends FormBuilderPresenter<FfiState> {
 
   @override
   void commitValues(
-    Map<String, FormBuilderFieldState<FormBuilderField, dynamic>> fields,
+    Map<String, Object?> propertyValues,
   ) {
-    this.state = FfiState.completed(
-      filePath: fields["filePath"]!.value as String,
+    state = FfiState.completed(
+      filePath: propertyValues[filePath.name]! as String,
     );
   }
 
   @override
   void doSubmit() {
     final state = this.state;
-    if (!(state is FfiStateCompleted)) {
+    if (state is! FfiStateCompleted) {
       return;
     }
 

@@ -18,6 +18,13 @@
                 "hint": "ファイルパスを入力"
             },
             "runButton": "実行"
+        },
+        "form": {
+            "title": "フォーム",
+            "stringValue": {
+                "label": "FormBuilderTextField",
+                "hint": "空でない文字列を入力"
+            }
         }
     }
 }

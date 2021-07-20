@@ -3,7 +3,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 
+import 'l10n/locale_keys.g.dart';
 import 'screens/ffi.dart';
+import 'screens/form.dart';
 import 'screens/home.dart';
 
 typedef RouterFunction = Widget Function(BuildContext);
@@ -18,6 +20,7 @@ class RouteData {
 
 const homeRoute = '/';
 const ffiRoute = '/ffi';
+const formRoute = '/form';
 
 final appRouteData = [
   RouteData._(
@@ -31,6 +34,12 @@ final appRouteData = [
     ffiRoute,
     Icons.home,
     (_) => FfiScreen(),
+  ),
+  RouteData._(
+    LocaleKeys.screens_form_title,
+    formRoute,
+    Icons.input,
+    (_) => FormScreen(),
   ),
 ];
 

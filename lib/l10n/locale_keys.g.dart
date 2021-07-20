@@ -15,6 +15,11 @@ abstract class  LocaleKeys {
   static const screens_ffi_pathTextForm = 'screens.ffi.pathTextForm';
   static const screens_ffi_runButton = 'screens.ffi.runButton';
   static const screens_ffi = 'screens.ffi';
+  static const screens_form_title = 'screens.form.title';
+  static const screens_form_stringValue_label = 'screens.form.stringValue.label';
+  static const screens_form_stringValue_hint = 'screens.form.stringValue.hint';
+  static const screens_form_stringValue = 'screens.form.stringValue';
+  static const screens_form = 'screens.form';
   static const screens = 'screens';
 
 }

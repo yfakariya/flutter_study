@@ -34,6 +34,13 @@ class CodegenLoader extends AssetLoader{
         "hint": "Input file path"
       },
       "runButton": "Run"
+    },
+    "form": {
+      "title": "Form",
+      "stringValue": {
+        "label": "FormBuilderTextField",
+        "hint": "Input non-empty string"
+      }
     }
   }
 };
@@ -57,6 +64,13 @@ static const Map<String,dynamic> ja = {
         "hint": "ファイルパスを入力"
       },
       "runButton": "実行"
+    },
+    "form": {
+      "title": "フォーム",
+      "stringValue": {
+        "label": "FormBuilderTextField",
+        "hint": "空でない文字列を入力"
+      }
     }
   }
 };

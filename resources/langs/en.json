@@ -18,6 +18,13 @@
                 "hint": "Input file path"
             },
             "runButton": "Run"
+        },
+        "form": {
+            "title": "Form",
+            "stringValue": {
+                "label": "FormBuilderTextField",
+                "hint": "Input non-empty string"
+            }
         }
     }
 }
